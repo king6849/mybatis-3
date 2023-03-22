@@ -1,0 +1,36 @@
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--加载外部properties文件，位置必须在第一个-->
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <!-- 控制台输出sql语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+    <typeAliases>
+        <!--给单独的实体类取别名-->
+        <!--<typeAlias type="com.lwq.domain.User" alias="user"/>-->
+        <!--批量给实体类取别名：指定包下面所有的类的别名默认为其类名，不区分大小写-->
+        <package name="Demo.pojo"/>
+    </typeAliases>
+
+
+    <environments default="development">
+        <environment id="development">
+            <!--當前事務交給jdbc處理-->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="demo/CustomerMapper.xml"/>
+    </mappers>
+</configuration>
